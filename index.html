@@ -240,14 +240,8 @@
           novalidate → disabilita la validazione HTML5 nativa del browser,
           utile se si vuole gestire la validazione con CSS o JavaScript custom.
         -->
-        <form class="contact-form" novalidate>
+        <form class="contact-form" id="contactForm" novalidate>
 
-          <!--
-            mb-3 → margine inferiore Bootstrap (1rem) tra i campi.
-            Ogni campo segue il pattern Bootstrap: .mb-3 > label[for] + input#id
-            Il for="nome" collega la label all'input: cliccando sulla label
-            si attiva il focus sull'input (accessibilità).
-          -->
           <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input
@@ -257,14 +251,11 @@
               class="form-control"
               required
             />
+            <div class="invalid-feedback">Inserisci il tuo nome.</div>
           </div>
 
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <!--
-              type="email" → il browser valida automaticamente il formato e
-              mostra una tastiera ottimizzata su mobile.
-            -->
             <input
               type="email"
               id="email"
@@ -272,14 +263,11 @@
               class="form-control"
               required
             />
+            <div class="invalid-feedback">Inserisci un indirizzo email valido.</div>
           </div>
 
           <div class="mb-3">
             <label for="tipo" class="form-label">Tipo di progetto</label>
-            <!--
-              form-select → classe Bootstrap per stilizzare il <select> nativo.
-              selected sull'opzione "Residenziale" → valore preselezionato al caricamento.
-            -->
             <select id="tipo" name="tipo" class="form-select">
               <option value="residenziale" selected>Residenziale</option>
               <option value="interior-design">Interior design</option>
@@ -289,22 +277,20 @@
 
           <div class="mb-3">
             <label for="messaggio" class="form-label">Messaggio</label>
-            <!--
-              rows="5" → altezza iniziale della textarea in righe di testo.
-              L'utente può ridimensionarla verticalmente (resize: vertical in CSS).
-            -->
             <textarea
               id="messaggio"
               name="messaggio"
               class="form-control"
               rows="5"
+              required
             ></textarea>
+            <div class="invalid-feedback">Il messaggio deve contenere almeno 20 caratteri.</div>
           </div>
 
-          <!--
-            type="submit" → invia il form al server (o attiva l'evento "submit" in JS).
-            btn-submit    → classe custom per il bottone stilizzato full-width.
-          -->
+          <div id="formSuccess" class="alert alert-success d-none" role="alert">
+            Messaggio inviato! Ti risponderemo entro 48 ore.
+          </div>
+
           <button type="submit" class="btn-submit">Invia</button>
 
         </form>

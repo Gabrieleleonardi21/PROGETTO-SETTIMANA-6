@@ -137,3 +137,39 @@ worksFilters.addEventListener('click', e => {
 
 // Render iniziale: tutte le card
 render(projects);
+
+
+// ─── Validazione form contatti ────────────────────────────────
+const contactForm  = document.getElementById('contactForm');
+const formSuccess  = document.getElementById('formSuccess');
+const emailRegex   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function setValidity(input, valid) {
+  input.classList.toggle('is-invalid', !valid);
+  input.classList.toggle('is-valid',   valid);
+}
+
+contactForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const nome     = document.getElementById('nome');
+  const email    = document.getElementById('email');
+  const messaggio= document.getElementById('messaggio');
+
+  const nomeOk     = nome.value.trim().length > 0;
+  const emailOk    = emailRegex.test(email.value.trim());
+  const messaggioOk= messaggio.value.trim().length >= 20;
+
+  setValidity(nome,      nomeOk);
+  setValidity(email,     emailOk);
+  setValidity(messaggio, messaggioOk);
+
+  if (!nomeOk || !emailOk || !messaggioOk) return;
+
+  // Form valido: mostra conferma e resetta
+  formSuccess.classList.remove('d-none');
+  contactForm.reset();
+  [nome, email, messaggio].forEach(f => {
+    f.classList.remove('is-valid', 'is-invalid');
+  });
+});
