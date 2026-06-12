@@ -31,6 +31,61 @@
     &:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35); }
   }
 
+  // Sezione lavori
+  .works {
+    background-color: hsl(20, 8%, 12%);
+
+    &__heading    { color: hsl(40, 25%, 88%); }
+    &__subheading { color: hsl(40, 15%, 58%); }
+
+    &__filter-btn {
+      color: hsl(40, 15%, 65%);
+      border-color: hsl(20, 8%, 35%);
+
+      &:hover {
+        color: hsl(40, 25%, 95%);
+      }
+    }
+  }
+
+  // Card lavoro
+  .card-work {
+    background: hsl(20, 8%, 18%);
+    border-color: hsl(20, 8%, 27%);
+
+    &__title { color: hsl(40, 25%, 88%); }
+    &__year  { color: hsl(40, 15%, 55%); }
+
+    &:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35); }
+  }
+
+  // Modali (servizi + lavori)
+  .modal-content {
+    background-color: hsl(20, 8%, 18%);
+    border-color: hsl(20, 8%, 30%);
+    color: hsl(40, 25%, 88%);
+  }
+
+  .modal-header {
+    border-bottom-color: hsl(20, 8%, 27%);
+
+    .modal-title { color: hsl(40, 25%, 88%); }
+  }
+
+  .modal-footer {
+    border-top-color: hsl(20, 8%, 27%);
+  }
+
+  .modal-body {
+    color: hsl(40, 20%, 78%);
+
+    ul { color: hsl(40, 15%, 65%); }
+    p  { color: hsl(40, 20%, 78%); }
+  }
+
+  // Il btn-close di Bootstrap è un SVG scuro: va invertito su sfondo scuro
+  .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+
   // Sezione contatti
   .contact {
     background-color: hsl(20, 8%, 12%);

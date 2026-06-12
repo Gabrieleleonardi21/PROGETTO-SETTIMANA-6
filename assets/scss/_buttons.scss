@@ -2,10 +2,10 @@
 
 // ─── Bottoni ─────────────────────────────────────────────────
 
-// .btn-brand → bottone CTA nell'hero (sfondo scuro su hero colorato)
+// .btn-brand → bottone CTA nell'hero, ghost su sfondo brand
 .btn-brand {
-  display: inline-block; // necessario per applicare padding a un <a>
-  background-color: $color-dark;
+  display: inline-block;
+  background-color: transparent;
   color: $color-white;
   border: none;
   border-radius: $radius-base;
@@ -13,11 +13,11 @@
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  text-decoration: none; // rimuove la sottolineatura dai tag <a>
+  text-decoration: none;
   transition: background-color 0.2s, transform 0.15s;
 
   &:hover, &:focus {
-    background-color: $color-dark-hover;
+    background-color: $color-dark;
     color: $color-white;
     transform: translateY(-1px);
   }

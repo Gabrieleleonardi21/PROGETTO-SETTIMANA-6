@@ -103,7 +103,7 @@ body {
 
 .btn-brand {
   display: inline-block;
-  background-color: hsl(20, 20%, 15%);
+  background-color: transparent;
   color: #ffffff;
   border: none;
   border-radius: 4px;
@@ -115,7 +115,7 @@ body {
   transition: background-color 0.2s, transform 0.15s;
 }
 .btn-brand:hover, .btn-brand:focus {
-  background-color: hsl(20, 20%, 9%);
+  background-color: hsl(20, 20%, 15%);
   color: #ffffff;
   transform: translateY(-1px);
 }
@@ -201,6 +201,7 @@ body {
   background: #ffffff;
   padding: 2rem 1.25rem;
   border-radius: 8px;
+  cursor: pointer;
   transition: box-shadow 0.25s, transform 0.25s;
 }
 .card-service:hover {
@@ -222,6 +223,115 @@ body {
   color: #555;
   line-height: 1.6;
   margin: 0;
+}
+
+.works {
+  padding: 4rem 1.25rem;
+  background-color: hsl(40, 20%, 97%);
+  text-align: center;
+}
+.works__heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.works__subheading {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+.works__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+.works__filter-btn {
+  background: none;
+  border: 1px solid hsl(20, 15%, 72%);
+  border-radius: 4px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  color: #555;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.works__filter-btn:hover {
+  background-color: hsl(20, 30%, 35%);
+  border-color: hsl(20, 30%, 35%);
+  color: #ffffff;
+}
+.works__filter-btn.active {
+  background-color: hsl(20, 30%, 35%);
+  border-color: hsl(20, 30%, 35%);
+  color: #ffffff;
+  font-weight: 600;
+}
+@media (min-width: 480px) {
+  .works {
+    padding: 4.5rem 2rem;
+  }
+}
+@media (min-width: 768px) {
+  .works {
+    padding: 5rem 2rem;
+  }
+  .works__heading {
+    font-size: 1.75rem;
+  }
+}
+@media (min-width: 1200px) {
+  .works {
+    padding: 5.5rem 2rem;
+  }
+  .works__heading {
+    font-size: 2rem;
+  }
+}
+
+.card-work {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid hsl(20, 15%, 88%);
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.card-work:hover {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+.card-work__img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.card-work__body {
+  padding: 1rem 1.25rem 1.25rem;
+}
+.card-work__category {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: hsl(20, 30%, 35%);
+  background: rgba(116.025, 80.325, 62.475, 0.1);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.card-work__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+.card-work__year {
+  font-size: 0.8rem;
+  color: #888;
 }
 
 .contact {
@@ -416,6 +526,61 @@ body {
 [data-theme=dark] .card-service:hover {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
+[data-theme=dark] .works {
+  background-color: hsl(20, 8%, 12%);
+}
+[data-theme=dark] .works__heading {
+  color: hsl(40, 25%, 88%);
+}
+[data-theme=dark] .works__subheading {
+  color: hsl(40, 15%, 58%);
+}
+[data-theme=dark] .works__filter-btn {
+  color: hsl(40, 15%, 65%);
+  border-color: hsl(20, 8%, 35%);
+}
+[data-theme=dark] .works__filter-btn:hover {
+  color: hsl(40, 25%, 95%);
+}
+[data-theme=dark] .card-work {
+  background: hsl(20, 8%, 18%);
+  border-color: hsl(20, 8%, 27%);
+}
+[data-theme=dark] .card-work__title {
+  color: hsl(40, 25%, 88%);
+}
+[data-theme=dark] .card-work__year {
+  color: hsl(40, 15%, 55%);
+}
+[data-theme=dark] .card-work:hover {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+[data-theme=dark] .modal-content {
+  background-color: hsl(20, 8%, 18%);
+  border-color: hsl(20, 8%, 30%);
+  color: hsl(40, 25%, 88%);
+}
+[data-theme=dark] .modal-header {
+  border-bottom-color: hsl(20, 8%, 27%);
+}
+[data-theme=dark] .modal-header .modal-title {
+  color: hsl(40, 25%, 88%);
+}
+[data-theme=dark] .modal-footer {
+  border-top-color: hsl(20, 8%, 27%);
+}
+[data-theme=dark] .modal-body {
+  color: hsl(40, 20%, 78%);
+}
+[data-theme=dark] .modal-body ul {
+  color: hsl(40, 15%, 65%);
+}
+[data-theme=dark] .modal-body p {
+  color: hsl(40, 20%, 78%);
+}
+[data-theme=dark] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
 [data-theme=dark] .contact {
   background-color: hsl(20, 8%, 12%);
 }
@@ -438,3 +603,5 @@ body {
   background-color: hsl(20, 8%, 20%);
   color: hsl(40, 25%, 88%);
 }
+
+/*# sourceMappingURL=style.css.map */

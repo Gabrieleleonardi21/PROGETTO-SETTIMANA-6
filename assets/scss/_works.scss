@@ -1,0 +1,101 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ─── Sezione Lavori ───────────────────────────────────────────
+.works {
+  padding: 4rem 1.25rem;
+  background-color: hsl(40, 20%, 97%);
+  text-align: center;
+
+  &__heading    { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+  &__subheading { color: #666; font-size: 0.9rem; margin-bottom: 2rem; }
+
+  // Riga bottoni filtro
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+
+  &__filter-btn {
+    background: none;
+    border: 1px solid hsl(20, 15%, 72%);
+    border-radius: $radius-base;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    color: #555;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    &:hover {
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+      color: $color-white;
+    }
+
+    &.active {
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+      color: $color-white;
+      font-weight: 600;
+    }
+  }
+
+  @media (min-width: $bp-sm) { padding: 4.5rem 2rem; }
+  @media (min-width: $bp-md) {
+    padding: 5rem 2rem;
+    &__heading { font-size: 1.75rem; }
+  }
+  @media (min-width: $bp-lg) {
+    padding: 5.5rem 2rem;
+    &__heading { font-size: 2rem; }
+  }
+}
+
+// ─── Card Lavoro ──────────────────────────────────────────────
+.card-work {
+  border-radius: $radius-base * 2;
+  overflow: hidden;
+  background: $color-white;
+  border: 1px solid hsl(20, 15%, 88%);
+  text-align: left;
+  cursor: pointer;
+  @include card-elevata;
+
+  &__img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__body {
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  &__category {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $brand-primary;
+    background: rgba($brand-primary, 0.1);
+    border-radius: $radius-base;
+    padding: 0.15rem 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+  }
+
+  &__year {
+    font-size: 0.8rem;
+    color: #888;
+  }
+}

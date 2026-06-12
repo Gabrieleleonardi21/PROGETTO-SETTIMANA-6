@@ -96,6 +96,7 @@
             <!-- Ogni href punta all'id della sezione corrispondente (scroll smooth via CSS) -->
             <li class="nav-item"><a class="nav-link" href="#studio">Studio</a></li>
             <li class="nav-item"><a class="nav-link" href="#servizi">Servizi</a></li>
+            <li class="nav-item"><a class="nav-link" href="#lavori">Lavori</a></li>
             <li class="nav-item"><a class="nav-link" href="#contatti">Contatti</a></li>
           </ul>
         </div>
@@ -159,8 +160,8 @@
           -->
           <div class="col-12 col-md-4">
             <!-- card-service: blocco BEM definito in _services.scss -->
-            <div class="card-service">
-              <!-- __icon: display:block per sfruttare text-align:center della sezione -->
+            <div class="card-service" role="button" tabindex="0"
+                 data-bs-toggle="modal" data-bs-target="#modalServizio1">
               <span class="card-service__icon">🏠</span>
               <h3 class="card-service__title">Progettazione residenziale</h3>
               <p class="card-service__text">
@@ -171,7 +172,8 @@
           </div>
 
           <div class="col-12 col-md-4">
-            <div class="card-service">
+            <div class="card-service" role="button" tabindex="0"
+                 data-bs-toggle="modal" data-bs-target="#modalServizio2">
               <span class="card-service__icon">🪑</span>
               <h3 class="card-service__title">Interior design</h3>
               <p class="card-service__text">
@@ -182,7 +184,8 @@
           </div>
 
           <div class="col-12 col-md-4">
-            <div class="card-service">
+            <div class="card-service" role="button" tabindex="0"
+                 data-bs-toggle="modal" data-bs-target="#modalServizio3">
               <span class="card-service__icon">🧱</span>
               <h3 class="card-service__title">Ristrutturazioni</h3>
               <p class="card-service__text">
@@ -194,6 +197,32 @@
 
         </div><!-- /row -->
       </div><!-- /container -->
+    </section>
+
+
+    <!-- ────────────────────────────────────────────────────────
+         SEZIONE LAVORI
+         id="lavori" → destinazione del link "Lavori" nella navbar.
+         Le card sono iniettate da script.js tramite la funzione make().
+    ──────────────────────────────────────────────────────────── -->
+    <section id="lavori" class="works">
+      <div class="container">
+
+        <h2 class="works__heading">I nostri lavori</h2>
+        <p class="works__subheading">Alcuni progetti realizzati. Filtra per categoria.</p>
+
+        <!-- Bottoni filtro: event delegation su #worksFilters -->
+        <div class="works__filters" id="worksFilters">
+          <button class="works__filter-btn active" data-filter="Tutti">Tutti</button>
+          <button class="works__filter-btn" data-filter="Residenziale">Residenziale</button>
+          <button class="works__filter-btn" data-filter="Interior">Interior</button>
+          <button class="works__filter-btn" data-filter="Ristrutturazione">Ristrutturazione</button>
+        </div>
+
+        <!-- Griglia popolata da make() in script.js -->
+        <div class="row g-4" id="worksGrid"></div>
+
+      </div>
     </section>
 
 
@@ -333,6 +362,88 @@
 
       </div>
     </footer>
+
+
+    <!-- ────────────────────────────────────────────────────────
+         MODALI SERVIZI
+         Scritte direttamente in HTML e agganciate alle card tramite
+         data-bs-toggle="modal" / data-bs-target="#modalServizioN".
+    ──────────────────────────────────────────────────────────── -->
+
+    <!-- Modale 1 – Progettazione residenziale -->
+    <div class="modal fade" id="modalServizio1" tabindex="-1"
+         aria-labelledby="modalServizio1Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalServizio1Label">🏠 Progettazione residenziale</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          </div>
+          <div class="modal-body">
+            <p>Seguiamo ogni progetto residenziale dalla prima idea fino alla consegna delle chiavi, garantendo qualità e rispetto dei tempi.</p>
+            <ul>
+              <li>Sopralluogo e analisi del contesto</li>
+              <li>Progetto preliminare ed esecutivo</li>
+              <li>Pratiche edilizie e permessi</li>
+              <li>Direzione lavori e collaudo finale</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <a href="#contatti" class="btn-brand" data-bs-dismiss="modal">Richiedi un preventivo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modale 2 – Interior design -->
+    <div class="modal fade" id="modalServizio2" tabindex="-1"
+         aria-labelledby="modalServizio2Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalServizio2Label">🪑 Interior design</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          </div>
+          <div class="modal-body">
+            <p>Trasformiamo spazi abitativi e lavorativi attraverso una selezione accurata di materiali, colori e arredi su misura.</p>
+            <ul>
+              <li>Concept board e palette materiali</li>
+              <li>Progetto di illuminazione</li>
+              <li>Arredo su misura e coordinamento fornitori</li>
+              <li>Styling e allestimento finale</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <a href="#contatti" class="btn-brand" data-bs-dismiss="modal">Richiedi un preventivo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modale 3 – Ristrutturazioni -->
+    <div class="modal fade" id="modalServizio3" tabindex="-1"
+         aria-labelledby="modalServizio3Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalServizio3Label">🧱 Ristrutturazioni</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          </div>
+          <div class="modal-body">
+            <p>Riqualifichiamo spazi esistenti con un approccio attento alla struttura, all'efficienza energetica e al valore dell'immobile.</p>
+            <ul>
+              <li>Perizia e rilievo dello stato di fatto</li>
+              <li>Progetto di ristrutturazione e computo metrico</li>
+              <li>Gestione pratiche burocratiche e bonus fiscali</li>
+              <li>Coordinamento imprese e collaudo</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <a href="#contatti" class="btn-brand" data-bs-dismiss="modal">Richiedi un preventivo</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
     <!--
