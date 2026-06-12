@@ -1,0 +1,47 @@
+@use 'variables' as *;
+
+// ─── Navbar ──────────────────────────────────────────────────
+// La classe .navbar-atelier sovrascrive gli stili di default di Bootstrap
+// mantenendo la struttura Bootstrap (collapse, toggler, nav-link) ma applicando
+// i colori del progetto
+.navbar-atelier {
+  background-color: $color-dark; // sfondo scuro coerente col footer
+  padding: 0.75rem 1rem;
+
+  // Logo testuale a sinistra
+  .navbar-brand {
+    color: $color-light;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em; // leggera spaziatura per un look tipografico curato
+    &:hover { color: $color-white; } // schiarisce al passaggio del mouse
+  }
+
+  // Pulsante hamburger visibile solo su mobile (Bootstrap lo nasconde da md in su)
+  .navbar-toggler {
+    border-color: rgba($color-light, 0.5); // bordo semitrasparente crema
+    &:focus { box-shadow: none; } // rimuove il focus ring di Bootstrap (poco coerente col design)
+  }
+
+  // L'icona SVG hamburger di Bootstrap è nera di default:
+  // brightness(0) la porta a nero assoluto, invert(1) la inverte a bianco,
+  // opacity(0.85) la rende leggermente trasparente come il testo del menu
+  .navbar-toggler-icon {
+    filter: brightness(0) invert(1) opacity(0.85);
+  }
+
+  // Voci di menu
+  .nav-link {
+    color: rgba($color-light, 0.85); // leggermente trasparenti a riposo
+    font-size: 0.95rem;
+    transition: color 0.2s; // transizione fluida al hover
+    &:hover, &:focus { color: $color-white; } // pieno bianco al passaggio
+  }
+
+  // Quando il menu è collassato (mobile) aggiunge un piccolo spazio sopra le voci
+  .navbar-collapse {
+    @media (max-width: calc(#{$bp-md} - 1px)) {
+      padding-top: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@use 'variables' as *;
+
+// ─── Bottoni ─────────────────────────────────────────────────
+
+// .btn-brand → bottone CTA nell'hero (sfondo scuro su hero colorato)
+.btn-brand {
+  display: inline-block; // necessario per applicare padding a un <a>
+  background-color: $color-dark;
+  color: $color-white;
+  border: none;
+  border-radius: $radius-base;
+  padding: 0.65rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none; // rimuove la sottolineatura dai tag <a>
+  transition: background-color 0.2s, transform 0.15s;
+
+  &:hover, &:focus {
+    background-color: $color-dark-hover;
+    color: $color-white;
+    transform: translateY(-1px);
+  }
+}
+
+// .btn-submit → bottone "Invia" nel form contatti (sfondo brand)
+.btn-submit {
+  width: 100%;
+  background-color: $color-brand;
+  color: $color-white;
+  border: none;
+  border-radius: $radius-base;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 0.25rem;
+
+  &:hover, &:focus {
+    background-color: $color-brand-hover;
+    color: $color-white;
+  }
+}
+
+// ─── Override Bootstrap ───────────────────────────────────────
+// Sovrascrive le classi Bootstrap con i colori del brand.
+
+.btn-primary {
+  background-color: $brand-primary;
+  border-color: $brand-primary;
+  color: $color-white;
+  border-radius: $radius-base;
+
+  &:hover, &:focus, &:active, &.active {
+    background-color: $color-brand-hover;
+    border-color: $color-brand-hover;
+    color: $color-white;
+  }
+}
+
+.bg-primary {
+  background-color: $brand-primary !important;
+}
+
+.text-primary {
+  color: $brand-primary !important;
+}

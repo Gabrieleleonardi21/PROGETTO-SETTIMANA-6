@@ -1,0 +1,17 @@
+// ─── Reset / Base ────────────────────────────────────────────
+// box-sizing: border-box su tutti gli elementi:
+// padding e border vengono inclusi nella larghezza/altezza dichiarata,
+// evitando overflow inaspettati
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+// Abilita lo scroll animato per i link interni (es. #servizi, #contatti)
+html { scroll-behavior: smooth; }
+
+body {
+  // Font stack: prima Segoe UI (Windows), poi system-ui (macOS/iOS), infine sans-serif generica
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #1a1a1a;
+  margin: 0;
+}

@@ -1,12 +1,357 @@
 <!doctype html>
+<!--
+  lang="it" → dichiara la lingua al browser e agli screen reader,
+  migliora l'accessibilità e l'indicizzazione SEO.
+  data-theme viene aggiunto/rimosso da script.js per attivare il tema scuro.
+-->
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
+
+    <!--
+      viewport: width=device-width → la larghezza della viewport è quella del dispositivo
+      initial-scale=1.0 → nessuno zoom iniziale; fondamentale per il responsive mobile-first
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Atelier — Studio di architettura</title>
+
+    <!--
+      Bootstrap 5 CDN (CSS).
+      integrity → hash SRI: il browser verifica che il file non sia stato manomesso
+      crossorigin="anonymous" → necessario affinché il controllo SRI funzioni su risorse cross-origin
+    -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+
+    <!--
+      CSS personalizzato compilato da SCSS (assets/scss/style.scss → assets/css/style.css).
+      Va DOPO Bootstrap per poter sovrascrivere i suoi stili senza !important.
+    -->
     <link rel="stylesheet" href="assets/css/style.css" />
-    <title>Document</title>
   </head>
   <body>
-    <src href="assets/js/script.js"></src>
+
+    <!-- ────────────────────────────────────────────────────────
+         NAVBAR
+         navbar-expand-md → il menu è collassato (hamburger) sotto 768px,
+                            orizzontale da 768px in su.
+         sticky-top       → rimane incollata in cima durante lo scroll.
+         navbar-atelier   → classe custom per i colori del progetto.
+    ──────────────────────────────────────────────────────────── -->
+    <nav class="navbar navbar-atelier navbar-expand-md sticky-top">
+
+      <!--
+        container-fluid → si estende a tutta la larghezza disponibile.
+        px-3 / px-md-4 / px-lg-5 → padding orizzontale progressivo:
+        piccolo su mobile, medio su tablet, grande su desktop.
+      -->
+      <div class="container-fluid px-3 px-md-4 px-lg-5">
+
+        <!-- Logo testuale: href="#" riporta in cima alla pagina -->
+        <a class="navbar-brand" href="#">Atelier</a>
+
+        <!--
+          Pulsante tema scuro.
+          Posizionato al centro della navbar via "position: absolute; left: 50%"
+          definito in _toggle.scss.
+          aria-label → etichetta accessibile per screen reader (il bottone non ha testo visibile descrittivo).
+          id="themeToggle" → agganciato da script.js per gestire il click.
+          id="themeIcon"   → aggiornato da script.js per mostrare ☀️ o 🌙.
+        -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+          <span id="themeIcon">☀️</span>
+        </button>
+
+        <!--
+          Hamburger: visibile solo sotto 768px (Bootstrap lo nasconde da md in su).
+          data-bs-toggle="collapse" + data-bs-target="#mainNav" →
+            Bootstrap apre/chiude il div#mainNav al click, senza JavaScript custom.
+          aria-expanded="false" → stato iniziale per screen reader (menu chiuso).
+        -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          aria-label="Apri menu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--
+          Menu di navigazione.
+          collapse navbar-collapse → nascosto su mobile, visibile da md in su.
+          justify-content-end     → allinea le voci a destra su desktop.
+          id="mainNav"            → target del toggler hamburger.
+        -->
+        <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+          <ul class="navbar-nav gap-md-2">
+            <!-- Ogni href punta all'id della sezione corrispondente (scroll smooth via CSS) -->
+            <li class="nav-item"><a class="nav-link" href="#studio">Studio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#servizi">Servizi</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contatti">Contatti</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+
+
+    <!-- ────────────────────────────────────────────────────────
+         HERO
+         id="studio" → destinazione del link "Studio" nella navbar.
+         hero        → classe custom BEM definita in _hero.scss.
+         È un <section> semantico: identifica un blocco di contenuto autonomo.
+    ──────────────────────────────────────────────────────────── -->
+    <section id="studio" class="hero">
+
+      <!-- h1: un solo h1 per pagina, è il titolo principale indicizzato dai motori di ricerca -->
+      <h1 class="hero__title">Architettura per spazi che parlano</h1>
+
+      <p class="hero__subtitle">
+        Progettiamo case, uffici e spazi commerciali con attenzione alla luce,
+        ai materiali e al contesto.
+      </p>
+
+      <!--
+        CTA (call to action): tag <a> stilizzato come bottone con .btn-brand.
+        href="#contatti" → porta direttamente al form di contatto.
+      -->
+      <a href="#contatti" class="btn-brand">Inizia un progetto</a>
+
+    </section>
+
+
+    <!-- ────────────────────────────────────────────────────────
+         SEZIONE SERVIZI
+         id="servizi" → destinazione del link "Servizi" nella navbar.
+    ──────────────────────────────────────────────────────────── -->
+    <section id="servizi" class="services">
+
+      <!--
+        .container → centra il contenuto e applica un max-width di Bootstrap
+        per mantenere la leggibilità su schermi molto larghi.
+      -->
+      <div class="container">
+
+        <!-- h2: gerarchia corretta dopo h1 nell'hero -->
+        <h2 class="services__heading">I nostri servizi</h2>
+        <p class="services__subheading">Tre aree di lavoro, una sola attenzione alla qualità.</p>
+
+        <!--
+          Griglia Bootstrap:
+          row      → attiva il sistema a colonne (flexbox interno)
+          g-4      → gap di 1.5rem tra le colonne/righe (gutter)
+          justify-content-center → centra le colonne se non occupano tutta la riga
+        -->
+        <div class="row g-4 justify-content-center">
+
+          <!--
+            col-12    → larghezza piena su mobile (una card per riga)
+            col-md-4  → un terzo della larghezza da 768px in su (tre card per riga)
+          -->
+          <div class="col-12 col-md-4">
+            <!-- card-service: blocco BEM definito in _services.scss -->
+            <div class="card-service">
+              <!-- __icon: display:block per sfruttare text-align:center della sezione -->
+              <span class="card-service__icon">🏠</span>
+              <h3 class="card-service__title">Progettazione residenziale</h3>
+              <p class="card-service__text">
+                Case private, ville e ristrutturazioni domestiche, dal sopralluogo
+                alla consegna delle chiavi.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="card-service">
+              <span class="card-service__icon">🪑</span>
+              <h3 class="card-service__title">Interior design</h3>
+              <p class="card-service__text">
+                Allestimenti d'interno per case e uffici, con materiali selezionati
+                e arredo su misura.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="card-service">
+              <span class="card-service__icon">🧱</span>
+              <h3 class="card-service__title">Ristrutturazioni</h3>
+              <p class="card-service__text">
+                Riqualificazione di spazi esistenti, gestione dei lavori e
+                coordinamento con le imprese.
+              </p>
+            </div>
+          </div>
+
+        </div><!-- /row -->
+      </div><!-- /container -->
+    </section>
+
+
+    <!-- ────────────────────────────────────────────────────────
+         SEZIONE CONTATTI
+         id="contatti" → destinazione del link "Contatti" e del btn-brand nell'hero.
+    ──────────────────────────────────────────────────────────── -->
+    <section id="contatti" class="contact">
+      <div class="container">
+
+        <h2 class="contact__heading">Contattaci</h2>
+        <p class="contact__subheading">Compila il form, ti rispondiamo entro 48 ore.</p>
+
+        <!--
+          novalidate → disabilita la validazione HTML5 nativa del browser,
+          utile se si vuole gestire la validazione con CSS o JavaScript custom.
+        -->
+        <form class="contact-form" novalidate>
+
+          <!--
+            mb-3 → margine inferiore Bootstrap (1rem) tra i campi.
+            Ogni campo segue il pattern Bootstrap: .mb-3 > label[for] + input#id
+            Il for="nome" collega la label all'input: cliccando sulla label
+            si attiva il focus sull'input (accessibilità).
+          -->
+          <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <!--
+              type="email" → il browser valida automaticamente il formato e
+              mostra una tastiera ottimizzata su mobile.
+            -->
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo di progetto</label>
+            <!--
+              form-select → classe Bootstrap per stilizzare il <select> nativo.
+              selected sull'opzione "Residenziale" → valore preselezionato al caricamento.
+            -->
+            <select id="tipo" name="tipo" class="form-select">
+              <option value="residenziale" selected>Residenziale</option>
+              <option value="interior-design">Interior design</option>
+              <option value="ristrutturazione">Ristrutturazione</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="messaggio" class="form-label">Messaggio</label>
+            <!--
+              rows="5" → altezza iniziale della textarea in righe di testo.
+              L'utente può ridimensionarla verticalmente (resize: vertical in CSS).
+            -->
+            <textarea
+              id="messaggio"
+              name="messaggio"
+              class="form-control"
+              rows="5"
+            ></textarea>
+          </div>
+
+          <!--
+            type="submit" → invia il form al server (o attiva l'evento "submit" in JS).
+            btn-submit    → classe custom per il bottone stilizzato full-width.
+          -->
+          <button type="submit" class="btn-submit">Invia</button>
+
+        </form>
+      </div>
+    </section>
+
+
+    <!-- ────────────────────────────────────────────────────────
+         FOOTER
+         Tag semantico <footer>: identifica il piè di pagina del documento.
+    ──────────────────────────────────────────────────────────── -->
+    <footer class="footer-atelier">
+      <div class="container">
+
+        <!--
+          footer-cols: contenitore flex delle tre colonne.
+          Su mobile → flex-direction: column (impilate).
+          Da 768px  → flex-direction: row + justify-content: center (affiancate e centrate).
+        -->
+        <div class="footer-cols">
+
+          <!-- Colonna 1: identità dello studio -->
+          <div>
+            <p class="footer-atelier__brand">Atelier</p>
+            <p class="footer-atelier__tagline">Studio di architettura</p>
+            <p class="footer-atelier__address">Via dei Pioppi 12, Milano</p>
+          </div>
+
+          <!-- Colonna 2: link interni di navigazione (specchio della navbar) -->
+          <div>
+            <p class="footer-atelier__col-title">Link</p>
+            <a href="#studio">Studio</a>
+            <a href="#servizi">Servizi</a>
+            <a href="#contatti">Contatti</a>
+          </div>
+
+          <!-- Colonna 3: recapiti esterni con protocolli mailto: e tel: -->
+          <div>
+            <p class="footer-atelier__col-title">Contatti</p>
+            <!-- mailto: apre il client email predefinito -->
+            <a href="mailto:info@atelier.example">info@atelier.example</a>
+            <!-- tel: apre il telefono su mobile -->
+            <a href="tel:+390200001111">+39 02 0000 1111</a>
+          </div>
+
+        </div><!-- /footer-cols -->
+
+        <!--
+          &copy;  → simbolo © (HTML entity)
+          &mdash; → trattino lungo — (HTML entity)
+        -->
+        <p class="footer-atelier__bottom">
+          &copy; 2026 Atelier &mdash; tutti i diritti riservati
+        </p>
+
+      </div>
+    </footer>
+
+
+    <!--
+      Script Bootstrap (JS): caricato in fondo al <body> per non bloccare
+      il rendering della pagina (strategia "render-blocking" evitata).
+      Gestisce il comportamento del menu collapse/hamburger.
+    -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--
+      Script custom: gestisce il toggle del tema scuro (chiaro ↔ scuro)
+      e salva la preferenza in localStorage.
+      Va dopo Bootstrap perché ne usa le classi già inizializzate.
+    -->
+    <script src="assets/js/script.js"></script>
+
   </body>
 </html>

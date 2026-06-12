@@ -1,0 +1,13 @@
+@use 'variables' as *;
+
+// ─── card-elevata ─────────────────────────────────────────────
+// Ombra profonda e sollevamento al hover per le card.
+// Riusato su .card-service (servizi) e override Bootstrap .card.
+@mixin card-elevata {
+  transition: box-shadow 0.25s, transform 0.25s;
+
+  &:hover {
+    box-shadow: $shadow-card-hover;
+    transform: translateY(-2px);
+  }
+}

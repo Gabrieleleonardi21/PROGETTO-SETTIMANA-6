@@ -1,0 +1,48 @@
+@use 'variables' as *;
+
+// ─── Hero ─────────────────────────────────────────────────────
+// Sezione di apertura a schermo pieno con sfondo brand.
+// Usa la notazione BEM: .hero (blocco), .hero__title (elemento), ecc.
+.hero {
+  background-color: $color-brand;
+  padding: 5rem 1.25rem 4rem; // più padding in alto per respiro verticale
+  text-align: center;
+
+  // Titolo principale — grande e bold su sfondo colorato
+  &__title {
+    color: $color-white;
+    font-size: 1.6rem; // dimensione base mobile
+    font-weight: 700;
+    line-height: 1.3; // interlinea stretta per titoli grandi
+    margin-bottom: 1rem;
+  }
+
+  // Sottotitolo — leggermente trasparente per creare gerarchia visiva
+  &__subtitle {
+    color: rgba($color-white, 0.85);
+    font-size: 0.95rem;
+    max-width: 520px;    // limita la larghezza per la leggibilità su schermi medi
+    margin: 0 auto 2rem; // centra orizzontalmente e aggiunge spazio sotto
+    line-height: 1.6;
+  }
+
+  // Da 480px: più spazio e font leggermente più grande
+  @media (min-width: $bp-sm) {
+    padding: 6rem 2rem 5rem;
+    &__title    { font-size: 2rem; }
+    &__subtitle { font-size: 1rem; }
+  }
+
+  // Da 768px (tablet): padding e titolo ancora più grandi
+  @media (min-width: $bp-md) {
+    padding: 7rem 2rem 6rem;
+    &__title { font-size: 2.4rem; }
+  }
+
+  // Da 1200px (desktop): massima espressione tipografica
+  @media (min-width: $bp-lg) {
+    padding: 9rem 2rem 8rem;
+    &__title    { font-size: 2.8rem; }
+    &__subtitle { font-size: 1.1rem; max-width: 640px; } // larghezza massima allargata
+  }
+}

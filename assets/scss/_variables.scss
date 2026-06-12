@@ -1,0 +1,34 @@
+// Importa il modulo colore di Sass per poter usare color.adjust()
+// (necessario dalla versione Dart Sass 2.x in poi al posto delle funzioni globali come darken())
+@use 'sass:color';
+
+// ─── Palette colori ──────────────────────────────────────────
+// Definita con hsl() per leggibilità: hue / saturazione / luminosità
+// - $color-dark       → sfondo scuro per navbar e footer (tono terra molto scuro)
+// - $color-brand      → colore principale del brand (terra bruciata medio)
+// - $color-brand-hover→ brand scurito del 10%, usato sull'hover del btn-submit
+// - $color-dark-hover → dark scurito del 6%, usato sull'hover del btn-brand
+// - $color-light      → testo chiaro su sfondi scuri (crema calda)
+// - $color-white      → bianco puro per testi su brand/bottoni
+$color-dark:        hsl(20, 20%, 15%);
+$color-brand:       hsl(20, 30%, 35%);
+$color-brand-hover: color.adjust($color-brand, $lightness: -10%);
+$color-dark-hover:  color.adjust($color-dark,  $lightness: -6%);
+$color-light:       hsl(40, 30%, 90%);
+$color-white:       #ffffff;
+
+// Ombra applicata alle card al passaggio del mouse
+$shadow-card-hover: 0 10px 24px rgba(0, 0, 0, 0.12);
+
+// ─── Breakpoint mobile-first ─────────────────────────────────
+// - $bp-sm → 480px  (smartphone grandi / landscape)
+// - $bp-md → 768px  (tablet)
+// - $bp-lg → 1200px (desktop)
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1200px;
+
+// ─── Alias brand richiesti ────────────────────────────────────
+$brand-primary:   $color-brand;  // colore principale del brand
+$brand-secondary: $color-dark;   // colore secondario del brand
+$radius-base:     4px;           // raggio base bottoni e form
