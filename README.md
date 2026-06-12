@@ -1,136 +1,135 @@
 # Atelier — Studio di Architettura
 
-Sito web vetrina per uno studio di architettura, progettato con un approccio **mobile-first**, **responsive** e **accessibile**. Include tema chiaro/scuro, filtro progetti, modali interattive e form di contatto.
+Landing page single-page per uno studio di architettura fittizio, progettata con approccio **mobile-first**, **responsive** e **accessibile**. Include tema chiaro/scuro, portfolio con filtri, modali interattive e form di contatto con validazione custom.
 
 ---
 
-## 🚀 Tecnologie
+## Tecnologie
 
 | Tecnologia             | Uso                                                     |
 | ---------------------- | ------------------------------------------------------- |
 | **HTML5**              | Struttura semantica, accessibilità (ARIA), SEO          |
-| **SCSS/CSS3**          | Stili custom con variabili HSL, BEM, dark mode          |
+| **SCSS / CSS3**        | Variabili HSL, mixin, BEM, dark mode override           |
 | **Bootstrap 5.3**      | Griglia, componenti (navbar, modali, form), JS bundle   |
 | **Vanilla JavaScript** | Tema toggle, render dinamico progetti, event delegation |
 
 ---
 
-## 📁 Struttura del progetto
+## Struttura del progetto
 
 ```
-atelier/
-├── index.html              # Pagina principale (HTML completo)
-├── assets/
-│   ├── css/
-│   │   └── style.css       # Stili compilati da SCSS
-│   └── js/
-│       └── script.js       # Logica tema, lavori, modali
-└── README.md
+├── index.html
+└── assets/
+    ├── scss/
+    │   ├── style.scss        # entry point — @use delle tre partials
+    │   ├── _variables.scss   # palette HSL, breakpoint, alias brand
+    │   ├── _mixins.scss      # mixin riutilizzabili (es. card-elevata)
+    │   └── _components.scss  # stili BEM per ogni sezione
+    ├── css/
+    │   └── style.css         # CSS compilato (non editare direttamente)
+    └── js/
+        └── script.js         # tema, griglia lavori, modale, form
 ```
 
 ---
 
-## ✨ Funzionalità
+## Funzionalità
 
-### 1. Navbar responsive
+### Navbar responsive
 
-- Collasso hamburger sotto i 768px (`navbar-expand-md`)
-- **Sticky top** durante lo scroll
-- Toggle tema scuro posizionato al centro
+- Collasso hamburger sotto i 768px (`navbar-expand-md`) gestito da Bootstrap senza JS custom
+- Sticky top durante lo scroll
+- Toggle tema centrato con `position: absolute; left: 50%`
 
-### 2. Tema Chiaro / Scuro
+### Tema chiaro / scuro
 
-- Toggle con salvataggio in `localStorage`
+- Click sul toggle aggiunge/rimuove `data-theme="dark"` su `<html>`
+- Preferenza salvata in `localStorage` e ripristinata al caricamento
 - Icona dinamica ☀️ / 🌙
-- Variabili CSS tramite attributo `data-theme="dark"` su `<html>`
-- Transizioni fluide su tutti i componenti
+- Override completo in `_components.scss` sotto il selettore `[data-theme="dark"]`
 
-### 3. Sezione Servizi
+### Sezione Servizi
 
-- 3 card interattive con hover effects
-- **Modali Bootstrap** con dettagli per ogni servizio:
-  - Progettazione residenziale
-  - Interior design
-  - Ristrutturazioni
+- 3 card cliccabili con hover elevation
+- Ogni card apre una **modale Bootstrap** con elenco fasi del servizio e CTA verso il form
 
-### 4. Sezione Lavori (Portfolio)
+### Sezione Lavori (Portfolio)
 
-- **Render dinamico** via JavaScript dell'array `projects`
-- **Filtro per categoria**: Tutti | Residenziale | Interior | Ristrutturazione
-- **Event delegation** per performance ottimale
-- Card con immagine lazy-loaded, categoria, titolo, anno
-- **Modale dettaglio** con immagine grande, descrizione e dati progetto
+- Array `projects` definito in `script.js` con 6 progetti (titolo, anno, categoria, descrizione, immagine)
+- **Render dinamico** via helper `make()` (creazione DOM senza innerHTML)
+- **Filtri per categoria** con event delegation su `#worksFilters`: Tutti | Residenziale | Interior | Ristrutturazione
+- Click su una card apre una **modale Bootstrap** con immagine, categoria, anno e descrizione
+- Immagini caricate con `loading="lazy"`
 
-### 5. Form Contatti
+### Form contatti
 
-- Campi: Nome, Email, Tipo progetto, Messaggio
-- Stili Bootstrap + custom focus states
-- Validazione HTML5 nativa (`required`, `type="email"`)
+- Campi: Nome, Email, Tipo progetto (select), Messaggio
+- `novalidate` sul form — validazione interamente gestita da JavaScript
+- Controlli: nome non vuoto, email con regex `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`, messaggio ≥ 20 caratteri
+- Feedback visivo tramite classi Bootstrap `.is-valid` / `.is-invalid`
+- Alert di conferma dopo invio riuscito; campi resettati e stati ripuliti
 
-### 6. Footer
+### Footer
 
-- 3 colonne responsive: identità, link interni, contatti
-- Protocolli `mailto:` e `tel:` per email e telefono
-- Copyright dinamico
+- 3 colonne responsive: identità dello studio, link interni, recapiti (`mailto:` e `tel:`)
+- Da mobile (colonne impilate) a tablet/desktop (riga centrata) via flexbox
 
 ---
 
-## 🎨 Design System
+## Design System
 
 | Elemento             | Valore                            |
 | -------------------- | --------------------------------- |
-| **Palette primaria** | HSL(20, 30%, 35%) — terra/marrone |
-| **Font**             | `Segoe UI`, system-ui, sans-serif |
-| **Border radius**    | 4px (bottoni), 8px (card)         |
-| **Ombre card**       | `0 10px 24px rgba(0,0,0,0.12)`    |
-| **Breakpoint**       | 480px, 768px, 1200px              |
+| Colore brand         | `hsl(20, 30%, 35%)` — terra bruciata |
+| Sfondo scuro (navbar/footer) | `hsl(20, 20%, 15%)`      |
+| Testo chiaro         | `hsl(40, 30%, 90%)` — crema calda |
+| Font                 | `Segoe UI`, system-ui, sans-serif |
+| Border radius base   | `4px` (bottoni), `8px` (card)     |
+| Breakpoint           | 480px · 768px · 1200px            |
 
 ---
 
-## ♿ Accessibilità
+## Accessibilità
 
-- **Semantic HTML**: `<nav>`, `<section>`, `<footer>`, `<h1>` unico
-- **ARIA**: `aria-label`, `aria-expanded`, `aria-hidden`, `aria-labelledby`
-- **Keyboard navigation**: `tabindex="0"`, focus visibili
-- **Screen reader friendly**: label collegate agli input, testi alternativi immagini
-- **Color contrast**: testi chiari su sfondi scuri e viceversa
-
----
-
-## 📱 Responsive
-
-| Dispositivo       | Layout                                                   |
-| ----------------- | -------------------------------------------------------- |
-| Mobile (<768px)   | 1 colonna, menu hamburger, padding ridotto               |
-| Tablet (768px+)   | 3 colonne servizi, 2 colonne lavori, menu orizzontale    |
-| Desktop (1200px+) | Padding generoso, font-size maggiorato, 3 colonne lavori |
+- HTML semantico: `<nav>`, `<section>`, `<footer>`, un solo `<h1>`
+- Attributi ARIA: `aria-label`, `aria-expanded`, `aria-hidden`, `aria-labelledby`, `aria-controls`
+- Card servizi con `role="button"` e `tabindex="0"` per navigazione da tastiera
+- `lang="it"` dichiarato su `<html>` per screen reader e SEO
+- Label associate a ogni input tramite `for` / `id`
 
 ---
 
-## 🛠️ Come usare
+## Avvio rapido
 
-1. **Clona o scarica** i file nella struttura indicata sopra
-2. **Apri** `index.html` in un browser moderno
-3. **Bootstrap** e le immagini si caricano da CDN — richiede connessione internet
+Il progetto è completamente statico: apri `index.html` nel browser oppure usa un server locale.
 
-### Personalizzazione
+```bash
+# Node.js
+npx serve .
 
-- **Colori**: modifica le variabili HSL in `style.css`
-- **Progetti**: aggiorna l'array `projects` in `script.js`
-- **Testi**: modifica direttamente in `index.html`
+# Python
+python3 -m http.server 8080
+```
+
+Bootstrap e le immagini placeholder si caricano da CDN — richiede connessione internet.
+
+### Compilare SCSS
+
+```bash
+sass assets/scss/style.scss assets/css/style.css --watch
+```
 
 ---
 
-## 📝 Note tecniche
+## Note tecniche
 
-- **Bootstrap 5.3.8** caricato via CDN con SRI hash per sicurezza
-- **Script JS** in fondo al `<body>` per non bloccare il rendering
-- **CSS custom** caricato **dopo** Bootstrap per sovrascrivere senza `!important`
-- **Immagini**: placeholder da `picsum.photos` — sostituire con asset reali in produzione
+- Bootstrap 5.3.8 caricato via CDN con **SRI hash** (`integrity` + `crossorigin="anonymous"`)
+- Lo script custom è caricato in fondo al `<body>` per non bloccare il rendering
+- Il CSS custom è incluso **dopo** Bootstrap per sovrascrivere i suoi stili senza `!important`
+- Le immagini usano placeholder da `picsum.photos` — sostituire con asset reali in produzione
 
 ---
 
-## 📄 Licenza
+## Licenza
 
-&copy; 2026 Atelier — Studio di architettura.  
-Progetto dimostrativo. Tutti i diritti riservati.
+&copy; 2026 Atelier — Studio di architettura. Progetto dimostrativo a scopo didattico.
