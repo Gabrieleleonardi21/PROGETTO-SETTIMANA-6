@@ -1,29 +1,3 @@
-// ─── Entry point ─────────────────────────────────────────────
-// Questo file raccoglie tutti i partial nell'ordine corretto.
-// Non contiene stili propri: ogni partial è autonomo e responsabile
-// del proprio blocco di codice.
-//
-// Struttura dei partial:
-//   _variables  → variabili globali (colori, breakpoint, ombre)
-//   _base       → reset CSS e stili di html/body
-//   _navbar     → barra di navigazione
-//   _hero       → sezione hero (prima fold)
-//   _buttons    → bottoni .btn-brand e .btn-submit
-//   _services   → sezione servizi + card
-//   _contact    → sezione contatti + form
-//   _footer     → footer
-//   _toggle     → pulsante tema scuro nella navbar
-//   _dark       → sovrascritture tema scuro [data-theme="dark"]
-
-@use 'variables';  // caricato per primo: gli altri partial lo importano direttamente
+@use 'variables';
 @use 'mixins';
-@use 'base';
-@use 'navbar';
-@use 'hero';
-@use 'buttons';
-@use 'services';
-@use 'works';
-@use 'contact';
-@use 'footer';
-@use 'toggle';
-@use 'dark';
+@use 'components';
